@@ -1,19 +1,30 @@
-import { useState } from "react";
-
-import "./App.css";
-import { Button } from "./components/ui/button";
+import { HashRouter, Route, Routes } from "react-router-dom";
+import { routes, routesConfig } from "./routes";
+import { Layout } from "./components/Layout/Layout";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { Toaster } from "./components/ui/toaster";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div className="card">
-        <Button onClick={() => setCount((count) => count + 1)} variant="secondary">
-          count is {count}
-        </Button>
-      </div>
-    </>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <HashRouter>
+        <Layout>
+          <Routes>
+            {routes.slice(1).map((route) => (
+              <Route
+                key={route}
+                path={route}
+                element={routesConfig[route].element}
+              />
+            ))}
+            {routes.length && (
+              <Route path={"*"} element={routesConfig[routes[0]].element} />
+            )}
+          </Routes>
+        </Layout>
+        <Toaster />
+      </HashRouter>
+    </ThemeProvider>
   );
 }
 
