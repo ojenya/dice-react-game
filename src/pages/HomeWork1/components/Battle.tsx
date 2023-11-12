@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { DiceContext } from "@/contexts/DiceContext";
 import { useContext, useEffect } from "react";
 import { useRef, useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
 import { useDiceAnswer } from "@/hooks/useDiceAnswer";
 import { getRandomDegrees } from "@/lib/utils";
 
