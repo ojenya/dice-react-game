@@ -8,6 +8,7 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <HashRouter>
+        <Toaster />
         <Layout>
           <Routes>
             {routes.slice(1).map((route) => (
@@ -22,7 +23,6 @@ function App() {
             )}
           </Routes>
         </Layout>
-        <Toaster />
       </HashRouter>
     </ThemeProvider>
   );

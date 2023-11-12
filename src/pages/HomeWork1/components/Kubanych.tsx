@@ -9,8 +9,13 @@ import { getRandomDegrees } from "@/lib/utils";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Kubanych = () => {
-  const { setHistoryCnt, betScore, setBetScore, setPlayerScore } =
-    useContext(DiceContext);
+  const {
+    betScore,
+
+    setHistoryCnt,
+    setBetScore,
+    setPlayerScore,
+  } = useContext(DiceContext);
 
   const playerCubeRef = useRef<HTMLDivElement>(null);
   const [playerXFlipCount, setPlayerXFlipCount] = useState(0);
@@ -31,7 +36,7 @@ const Kubanych = () => {
 
   useEffect(() => {
     setPlayerScore(playerScores);
-  }, [playerXFlipCount, playerYFlipCount]);
+  }, [playerScores]);
 
   return (
     <div className="flex flex-col">
@@ -45,27 +50,64 @@ const Kubanych = () => {
         <h1 className="scroll-m-10  font-extrabold tracking-tight lg:text-1xl mb-2">
           Ваш выбор: {betScore}
         </h1>
+
         <Tabs
           defaultValue={`${betScore}`}
           className="flex flex-col justify-center align-center"
         >
           <TabsList className="flex  justify-center">
-            <TabsTrigger value="1" onClick={() => setBetScore(1)}>
+            <TabsTrigger
+              value="1"
+              onClick={() => {
+                setBetScore(1);
+                setHistoryCnt(0);
+              }}
+            >
               1
             </TabsTrigger>
-            <TabsTrigger value="2" onClick={() => setBetScore(2)}>
+            <TabsTrigger
+              value="2"
+              onClick={() => {
+                setBetScore(2);
+                setHistoryCnt(0);
+              }}
+            >
               2
             </TabsTrigger>
-            <TabsTrigger value="3" onClick={() => setBetScore(3)}>
+            <TabsTrigger
+              value="3"
+              onClick={() => {
+                setBetScore(3);
+                setHistoryCnt(0);
+              }}
+            >
               3
             </TabsTrigger>
-            <TabsTrigger value="4" onClick={() => setBetScore(4)}>
+            <TabsTrigger
+              value="4"
+              onClick={() => {
+                setBetScore(4);
+                setHistoryCnt(0);
+              }}
+            >
               4
             </TabsTrigger>
-            <TabsTrigger value="5" onClick={() => setBetScore(5)}>
+            <TabsTrigger
+              value="5"
+              onClick={() => {
+                setBetScore(5);
+                setHistoryCnt(0);
+              }}
+            >
               5
             </TabsTrigger>
-            <TabsTrigger value="6" onClick={() => setBetScore(6)}>
+            <TabsTrigger
+              value="6"
+              onClick={() => {
+                setBetScore(6);
+                setHistoryCnt(0);
+              }}
+            >
               6
             </TabsTrigger>
           </TabsList>
@@ -73,7 +115,11 @@ const Kubanych = () => {
       </div>
 
       <div className="flex items-center justify-center">
-        <Button className="flex w-[196px] items-center justify-center" variant={"secondary"} onClick={handleCubeClick}>
+        <Button
+          className="flex w-[196px] items-center justify-center"
+          variant={"secondary"}
+          onClick={handleCubeClick}
+        >
           Крутануть
         </Button>
       </div>

@@ -6,7 +6,7 @@ import Kubanych from "@/pages/HomeWork1/components/Kubanych";
 import Battle from "@/pages/HomeWork1/components/Battle";
 
 const TabsBar = () => {
-  const { gameType, setGameType } = useContext(DiceContext);
+  const { gameType, setGameType, setHistoryCnt } = useContext(DiceContext);
 
   return (
     <div className="flex w-full m-1 justify-center ">
@@ -15,10 +15,22 @@ const TabsBar = () => {
         className="flex flex-col justify-center align-center w-[250px]"
       >
         <TabsList className="flex  justify-center z-40">
-          <TabsTrigger value="papi4" onClick={() => setGameType("type1")}>
+          <TabsTrigger
+            value="papi4"
+            onClick={() => {
+              setHistoryCnt(0);
+              setGameType("type1");
+            }}
+          >
             Кубаныч by Папзаныч
           </TabsTrigger>
-          <TabsTrigger value="battle" onClick={() => setGameType("type2")}>
+          <TabsTrigger
+            value="battle"
+            onClick={() => {
+              setHistoryCnt(0);
+              setGameType("type2");
+            }}
+          >
             Заруба
           </TabsTrigger>
         </TabsList>

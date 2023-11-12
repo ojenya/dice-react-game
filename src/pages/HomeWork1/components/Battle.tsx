@@ -11,11 +11,11 @@ const Battle = () => {
     useContext(DiceContext);
   const playerCubeRef = useRef<HTMLDivElement>(null);
   const skynetCubeRef = useRef<HTMLDivElement>(null);
-
   const [playerXFlipCount, setPlayerXFlipCount] = useState(0);
   const [playerYFlipCount, setPlayerYFlipCount] = useState(0);
   const [skynetXFlipCount, setSkynetXFlipCount] = useState(0);
   const [skynetYFlipCount, setSkynetYFlipCount] = useState(0);
+
   const playerScores = useDiceAnswer(playerXFlipCount, playerYFlipCount);
   const skynetScores = useDiceAnswer(skynetXFlipCount, skynetYFlipCount);
 
@@ -41,15 +41,15 @@ const Battle = () => {
   useEffect(() => {
     setPlayerScore(playerScores);
     setCheapSkynetScore(skynetScores);
-  }, [playerXFlipCount, playerYFlipCount, skynetXFlipCount, skynetYFlipCount]);
+  }, [playerScores, skynetScores]);
 
   return (
     <div className="flex flex-col">
       <div className="flex w-[500px] justify-between">
-        <div className="mr-7">
+        <div className="mr-7 mt-3">
           <Dice cubeRef={playerCubeRef} title="Ваш кубан" />
         </div>
-        <div className="ml-7">
+        <div className="ml-7 mt-3">
           <Dice cubeRef={skynetCubeRef} title="Не ваш кубан" />
         </div>
       </div>

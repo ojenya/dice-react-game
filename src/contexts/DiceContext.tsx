@@ -6,6 +6,7 @@ export interface ContextProps {
   playerScore: number;
   betScore: number;
   cheapSkynetScore: number;
+  historyCnt: number;
   setHistoryCnt: React.Dispatch<React.SetStateAction<number>>;
   setGameType: React.Dispatch<React.SetStateAction<"type1" | "type2">>;
   setBetScore: React.Dispatch<React.SetStateAction<number>>;
@@ -29,23 +30,8 @@ export const DiceContextProvider: React.FC<
 
   useEffect(() => {
     if (historyCnt > 0) {
-      if (gameType === "type1") {
-        if (betScore === playerScore) {
-          toast({
-            variant: "default",
-            title: "С заносиком!",
-            description: "Вы угадали))",
-          });
-        } else {
-          toast({
-            variant: "destructive",
-            title: "Земля металлом!",
-            description: "Вы не угадали((",
-          });
-        }
-      }
       if (gameType === "type2") {
-        if (playerScore > 4) {
+        if (playerScore > cheapSkynetScore) {
           toast({
             variant: "default",
             title: "С заносиком!",
@@ -66,7 +52,27 @@ export const DiceContextProvider: React.FC<
         }
       }
     }
-  }, [gameType, playerScore, cheapSkynetScore, historyCnt, betScore]);
+  }, [playerScore, cheapSkynetScore, historyCnt, gameType]);
+
+  useEffect(() => {
+    if (historyCnt > 0) {
+      if (gameType === "type1") {
+        if (betScore === playerScore) {
+          toast({
+            variant: "default",
+            title: "С заносиком!",
+            description: "Вы угадали))",
+          });
+        } else {
+          toast({
+            variant: "destructive",
+            title: "Земля металлом!",
+            description: "Вы не угадали((",
+          });
+        }
+      }
+    }
+  }, [playerScore, historyCnt, betScore, gameType]);
 
   const contextValue = useMemo(
     () => ({
@@ -74,6 +80,7 @@ export const DiceContextProvider: React.FC<
       cheapSkynetScore,
       betScore,
       gameType,
+      historyCnt,
       setHistoryCnt,
       setGameType,
       setPlayerScore,
